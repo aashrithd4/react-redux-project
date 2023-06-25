@@ -12,12 +12,14 @@ const ProductDetail = () => {
     console.log(productID);
     console.log("single product", product)
     const {image, title, price, description, category} = product;
+
     const fetchProductDetail = async () => {
         const response = await axios.get(`https://fakestoreapi.com/products/${productID}`)
                                     .catch(err => console.log("Err", err));
         console.log(response.data);
         store.dispatch(selectedProduct(response.data));
     }
+    
     useEffect(() => {
         if(productID && productID!== "")
         {
@@ -30,14 +32,6 @@ const ProductDetail = () => {
     },[productID])// useEffect will run once product id changes 
 
     const [isloading, setLoading] = useState(true);
-
-    const loader = () => {
-        return (
-            <div>
-                isloading...
-            </div>
-        )
-    }
 
     const renderData = () => {
         return(
